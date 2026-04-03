@@ -9,5 +9,6 @@ dever 03 foi acabado dia 19/03 às 22:53
 
 dever 04 foi acabado dia 26/03 às 19:45 e corrijido 27/03
 
-dever 05 foi acabado dia 02/04 às 22:55  ]
+dever 05 foi acabado dia 02/04 às 22:55  
+
 o link do docs com essa atividade: https://docs.google.com/document/d/1ORTNPz9YqWrbaWSIxohTL2XgfrfmAiGaih4clM_IUcU/edit?usp=sharing
