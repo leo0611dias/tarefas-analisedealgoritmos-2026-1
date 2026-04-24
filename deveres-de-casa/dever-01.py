@@ -1,36 +1,46 @@
-import random
 import time
+import random
 
-def insertion_sort(lista):
-    for i in range(1, len(lista)):
-        atual = lista[i]
+"""
+Performance benchmark comparing Insertion Sort and Python's native TimSort.
+"""
+
+SCALE = [1000, 5000, 10000, 20000, 50000]
+
+
+def insertion_sort(arr):
+    """Sorts a list of integers using insertion sort."""
+    for i in range(1, len(arr)):
+        key = arr[i]
         j = i - 1
 
-        while j >= 0 and lista[j] > atual:
-            lista[j + 1] = lista[j]
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
             j -= 1
 
-        lista[j + 1] = atual
+        arr[j + 1] = key
 
-tamanhos = [1000, 5000, 10000, 20000, 50000]
 
-for n in tamanhos:
-    lista = [random.randint(0, 100000) for _ in range(n)]
+def run_sorting_benchmark():
+    """Runs the performance test for each scale defined."""
+    for n in SCALE:
+        base_list = [random.randint(0, n * 10) for _ in range(n)]
 
-    lista1 = lista.copy()
-    lista2 = lista.copy()
+        # TimSort (n log n)
+        tim_list = base_list.copy()
+        start = time.time()
+        tim_list.sort()
+        time_tim_sort = time.time() - start
 
-    inicio = time.time()
-    insertion_sort(lista1)
-    fim = time.time()
-    tempo_insertion = fim - inicio
+        # Insertion Sort (O(n²))
+        insertion_list = base_list.copy()
+        start = time.time()
+        insertion_sort(insertion_list)
+        time_insertion_sort = time.time() - start
 
-    inicio = time.time()
-    sorted(lista2)
-    fim = time.time()
-    tempo_sorted = fim - inicio
+        print(f"n = {n:<5} | TimSort: {time_tim_sort:>10.6f}s | Insertion: {time_insertion_sort:>10.6f}s")
+        print("-" * 40)
 
-    print(f"n = {n}")
-    print(f"Insertion Sort: {tempo_insertion:.5f} s")
-    print(f"sorted() (Timsort): {tempo_sorted:.5f} s")
-    print("-" * 30)
+
+if __name__ == "__main__":
+    run_sorting_benchmark()
