@@ -1,29 +1,38 @@
+import math
+
+
 def F(n):
     """
-    Função recursiva que calcula F(n) = 2F(n-1) + n²
-    Caso base: F(1) = 2
+    Function that calculates the value of F(n) using recursion
     """
-    if n == 1:
+    if n == 1:  # base case
         return 2
-    else:
-        return 2 * F(n - 1) + n ** 2
 
-def main():
-    try:
-        # Solicita o valor de n ao usuário
-        n = int(input("Digite o valor de n: "))
-        
-        # Verifica se n é válido (maior ou igual a 1)
-        if n < 1:
-            print("Erro: n deve ser maior ou igual a 1")
-        else:
-            # Calcula e exibe o resultado
-            resultado = F(n)
-            print(f"F({n}) = {resultado}")
-            
-    except ValueError:
-        print("Erro: Por favor, digite um número inteiro válido.")
+    return 2 * F(n - 1) + n**2  # recursive call
 
-# Executa o programa
+
+def closed_formula(n):
+    """
+    Function that calculates the value of F(n) using the closed formula
+    """
+    # F(n) = 2^n * F(1) + sum of k^2 * 2^(n-k) for k=2 till n
+    resultado = 2**n * 2  # homogeneous part: 2^n * F(1)
+
+    for k in range(2, n + 1):
+        resultado += (k**2) * (2 ** (n - k))
+
+    return resultado
+
+
 if __name__ == "__main__":
-    main()
+
+    n = int(input("Type the value of n: "))
+
+    if n < 1:
+        print("n must be greater than or equal 1.")
+    else:
+        recursive_result = F(n)
+        closed_result = closed_formula(n)
+
+        print(f"\nF({n}) by recursion = {recursive_result}")
+        print(f"F({n}) by closed formula = {closed_result}") 
